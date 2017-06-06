@@ -74,16 +74,21 @@ public class IdWorker {
 
 
     public static void main(String[] args){
-        IdWorker worker2 = null;
-//        System.out.println(worker2.nextId());
+       ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
-        for(int i=0;i<100;i++)
-        try {
-            Thread.sleep(1);
-             worker2 = new IdWorker(new Random().nextInt(1024));
-            System.out.println(worker2.nextId());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        for(int i=0;i<1000;i++) {
+            singleThreadExecutor.execute(new Runnable() {
+                public void run() {
+//                    IdWorker idWorker = new IdWorker(new Random().nextInt(1024));
+                    IdWorker idWorker = new IdWorker(1);
+                    try {
+                        Thread.sleep(1);
+                        System.out.println(idWorker.nextId());
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
         }
 
     }
