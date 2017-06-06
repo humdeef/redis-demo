@@ -1,1 +1,2 @@
-# redis-demo
+# copy  other's redis-demo
+add id
